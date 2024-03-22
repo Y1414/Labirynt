@@ -17,7 +17,7 @@ void fill_path (int start, int width, FILE* in){
         char x;
         if ((x = fgetc(in)) == ' '){
             fseek(in, -1, SEEK_CUR);
-            fputc('X', in);
+            fputc('O', in);
         }
         if (check_if_corridor(ways) == false){
             direction = choose_direction(ways, direction);

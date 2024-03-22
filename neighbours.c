@@ -31,7 +31,7 @@ int count_walls(int current, FILE*in, int width){
     char ways[4] = {check_up(current, in, width), check_right(current, in), check_down(current, in, width), check_left(current, in)};
     char sum = 0;
     for (int i=0;i<4;i++){
-        if (ways[i] == 'X' || ways[i] == '\n')
+        if (ways[i] == 'X' || ways[i] == '\n' || ways[i] == 'O')
             sum++;
     }   
     return sum;
