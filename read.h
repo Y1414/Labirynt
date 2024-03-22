@@ -1,0 +1,1 @@
+void read (int* start, int*end, int*width, FILE *in);
