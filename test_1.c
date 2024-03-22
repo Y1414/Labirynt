@@ -2,6 +2,7 @@
 
 #include "ff.h"
 #include "read.h"
+#include "clear.h"
 
 int main (){
     FILE* in = fopen("300_20.txt", "r+");
@@ -9,8 +10,9 @@ int main (){
     read(&start, &end, &width, in);
 
     
-    while(ff(in, width));
-;
+    //while(ff(in, width));
+
+    clear(in);
     fclose(in);
 
     return 0;
