@@ -1,0 +1,1 @@
+void inverse(FILE* in);

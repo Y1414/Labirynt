@@ -1,0 +1,1 @@
+void instructions (int start, int width, int end, FILE*in, FILE*out);

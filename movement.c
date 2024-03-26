@@ -35,7 +35,6 @@ int move_forward (int current, char direction, int width){
 
 char choose_direction(char*ways, char direction){
     direction = (direction+2)%4;
-    //printf("%d ", direction);
     char new_direction;
     for (int i=0;i<4;i++){
         new_direction =i;

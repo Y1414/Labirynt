@@ -6,7 +6,7 @@ void clear (FILE*in){
     char x;
     while ((x = fgetc(in)) != EOF)
     {
-        if (x == 'O'){
+        if (x == 'O' || x == '.'){
             fseek(in, -1 , SEEK_CUR);
             fputc(' ', in);
         }    

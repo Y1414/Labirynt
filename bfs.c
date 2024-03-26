@@ -59,7 +59,9 @@ void translate_path (int start, int width,int end, FILE* in){
         fseek(in, current, SEEK_SET);
 
         char current_char = fgetc(in);
+
         direction = get_direction(current_char);
+        
         fseek(in, -1, SEEK_CUR);
         if (current == end)
             fputc('K', in);
