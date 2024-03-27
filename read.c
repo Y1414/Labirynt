@@ -23,11 +23,9 @@ void read (int*start, int*end, int*width, FILE *in){
             break;
         case ' ':
             break;
-        case 'O':
-            break;
         default:
-            printf("błędny format pliku");
-            printf("%c ", current_char);
+            printf("błędny format pliku: ");
+            printf("%c\n", current_char);
             exit(1);
         }
 

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 void inverse(FILE* in){
+    rewind(in);
     char x;
     while ((x = fgetc(in)) != EOF)
     {

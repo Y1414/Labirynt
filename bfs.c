@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "stack.h"
-#include "read.h"
 #include "neighbours.h"
 #include "movement.h"
 #include "inverse.h"
@@ -53,7 +52,7 @@ void translate_path (int start, int width,int end, FILE* in){
 
         char ways[4] = {check_up(current, in, width), check_right(current, in), check_down(current, in, width), check_left(current, in)};
         if (is_start(ways)){
-            fputc(' ', in);
+            fputc('+', in);
             break;
         }
         fseek(in, current, SEEK_SET);
