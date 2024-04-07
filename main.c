@@ -17,7 +17,7 @@ int main (int argc, char** argv ){
     }
     FILE*in;
     char* filename = argv[1];
-    if (strstr(filename, ".bin")){
+    if (strstr(filename, ".bin\0")){
         FILE* bin = fopen(filename, "rb");
         if (bin == NULL){
             printf("Błąd w czytaniu pliku: %s", filename);
@@ -25,7 +25,7 @@ int main (int argc, char** argv ){
         }
         in = fopen(translate(bin), "r+");
     }
-    else if (strstr(filename, ".txt")){
+    else if (strstr(filename, ".txt\0")){
         in = fopen(filename, "r+");
         if (in == NULL){
             printf("Błąd w czytaniu pliku: %s", filename);
