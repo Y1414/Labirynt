@@ -17,13 +17,16 @@ int main (int argc, char** argv ){
     }
     FILE*in;
     char* filename = argv[1];
+    char* maze_filename = "";
+
     if (strstr(filename, ".bin\0")){
         FILE* bin = fopen(filename, "rb");
         if (bin == NULL){
             printf("Błąd w czytaniu pliku: %s", filename);
             return 1;
         }
-        in = fopen(translate(bin), "r+");
+        maze_filename = translate(bin);
+        in = fopen(maze_filename, "r+");
     }
     else if (strstr(filename, ".txt\0")){
         in = fopen(filename, "r+");
@@ -31,6 +34,10 @@ int main (int argc, char** argv ){
             printf("Błąd w czytaniu pliku: %s", filename);
             return 1;
         }
+    }
+    else{
+        printf("Nieznany format pliku\n");
+        return 1;
     }
 
     char * instructions_filename = "instructions.txt";
@@ -47,7 +54,10 @@ int main (int argc, char** argv ){
 
     fclose(in);
     fclose(out);
-    printf("Instrukcje pozwalające przejść labirynt znajdują się w pliku %s\n", instructions_filename);
-
+    printf("Instrukcje pozwalające przejść labirynt znajdują się w pliku %s", instructions_filename);
+    if (maze_filename != ""){
+        printf(", a prztłumaczony na format txt labirynt w pliku %s", maze_filename);
+    }
+    printf("\n");
     return 0;
 }
