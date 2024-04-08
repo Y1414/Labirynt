@@ -42,12 +42,6 @@ char choose_direction(char*ways, char direction){
             return new_direction;
         }
     }
-    for (int i=0;i<4;i++){
-        new_direction =i;
-        if (ways[i] == 'O' && new_direction != direction){
-            return new_direction;
-        }
-    }
     return direction;
 
 }
