@@ -12,7 +12,8 @@
 void instructions (int start, int width, int end, FILE*in, FILE*out){
     int current = start;
     char ways[4] = {check_up(current, in, width), check_right(current, in), check_down(current, in, width), check_left(current, in)};
-    char direction = choose_direction(ways, direction);
+    char direction = 0;
+    direction = choose_direction(ways, direction);
     char new_direction;
     int sum = -1;
 
