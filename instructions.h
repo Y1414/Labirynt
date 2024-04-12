@@ -1,1 +1,1 @@
-void instructions (int start, int width, int end, FILE*in, FILE*out);
+void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin);

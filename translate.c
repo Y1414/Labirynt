@@ -1,17 +1,29 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdlib.h>
 
-typedef struct 
-    {
-        uint32_t part1;
-        uint32_t part2;
-        uint32_t part3;
-    } Reserved;
+typedef struct {
+    uint32_t part1;
+    uint32_t part2;
+    uint32_t part3;
+} Reserved;
 
-char*  translate(FILE*in ) {
-    char* filename = "maze.txt";
-    FILE * out = fopen(filename, "w");
+char*  translate(FILE*in, char* filename ) {
+
+    char*format_name = "txt";
+    for (int i=1;i<=3;i++){
+        filename[strlen(filename) - i] = format_name[strlen(format_name) - i];
+    }
+
+    
+
+    FILE*out = fopen(filename, "w");
+
+    if (out == NULL){
+        printf("bład w otwieranie pliku bin\n");
+        exit(1);
+    }
     
     
     uint32_t id;
@@ -71,15 +83,26 @@ char*  translate(FILE*in ) {
         }
     }
     
-    fclose(in);
     fclose(out);
 
     return filename;
 }
 
-void to_bin(FILE* in){
+FILE* to_bin(FILE* in, char* filename){
 
-    FILE*out = fopen("maze.bin", "w");
+    char*format_name = "bin";
+    for (int i=1;i<=3;i++){
+        filename[strlen(filename) - i] = format_name[strlen(format_name) - i];
+    }
+
+    
+
+    FILE*out = fopen(filename, "w+");
+
+    if (out == NULL){
+        printf("bład w otwieranie pliku bin\n");
+        exit(1);
+    }
 
     uint32_t id = 0x52524243;
     uint8_t escape = 0x1B;
@@ -168,5 +191,5 @@ void to_bin(FILE* in){
     fwrite(&path, sizeof(path), 1, out);
     
 
-    fclose(out);
+    return out;
 }
