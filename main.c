@@ -34,6 +34,7 @@ int main (int argc, char** argv ){
             printf("Błąd w czytaniu pliku: %s", filename);
             return 1;
         }
+        to_bin(in);
     }
     else{
         printf("Nieznany format pliku\n");
