@@ -105,6 +105,7 @@ FILE* to_bin(FILE* in, char* filename){
     }
 
     uint32_t id = 0x52524243;
+    uint32_t solution_id = 0x52524243;
     uint8_t escape = 0x1B;
     uint16_t columns = 1;
     uint16_t lines = 1;
@@ -171,6 +172,7 @@ FILE* to_bin(FILE* in, char* filename){
     fwrite(&separator, sizeof(separator), 1, out);
     fwrite(&value, sizeof(value), 1, out);
     fwrite(&count, sizeof(count), 1, out);
+    fwrite(&solution_id, sizeof(solution_offset), 1, out);
 
 
     rewind(in);

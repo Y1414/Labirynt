@@ -29,10 +29,10 @@ void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
     char new_direction;
     int sum = -1;
 
+    uint32_t id;
     uint32_t counter = 0;
     uint32_t solution_offset = 0;
-    uint32_t id = 0x52524243;
-    uint32_t steps = 0;
+    uint32_t steps = 1;
     uint8_t direction_bin;
     uint8_t count;
 
@@ -40,13 +40,13 @@ void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
 
     fread(&counter, sizeof(counter), 1, bin);
 
-    solution_offset = counter*3 + 60;
+    solution_offset = counter*3 + 40;
 
     fwrite(&solution_offset, sizeof(solution_offset), 1, bin);
 
     fseek(bin , solution_offset, SEEK_SET);
+    fread(&id, sizeof(id), 1, bin);
 
-    fwrite(&id,sizeof(id) , 1, bin);
     fwrite(&steps,sizeof(steps) , 1, bin);
 
 
@@ -69,7 +69,7 @@ void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
 
             fwrite(&direction_bin, sizeof(direction_bin), 1, bin);
             fwrite(&count, sizeof(count), 1, bin);
-
+            steps++;
 
             direction = choose_direction(ways, direction);
             
@@ -84,6 +84,9 @@ void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
     count = sum;
     fwrite(&direction_bin, sizeof(direction_bin), 1, bin);
     fwrite(&count, sizeof(count), 1, bin);
+    fseek(bin , solution_offset, SEEK_SET);
+    fread(&id, sizeof(id), 1, bin);
+    fwrite(&steps,sizeof(steps) , 1, bin);
 
     fclose(out);
 }
