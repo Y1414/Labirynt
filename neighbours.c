@@ -4,26 +4,26 @@
     
 int check_right (int current, FILE*in){   
     char character; 
-    fseek(in, current + 1, SEEK_SET); // jeden w prawK
-    character = fgetc(in); // jeden w prawK
+    fseek(in, current + 1, SEEK_SET); 
+    character = fgetc(in); 
     return character;
 }
 int check_left (int current, FILE*in){   
     char character; 
-    fseek(in, current - 1, SEEK_SET); // K jeden w lewK
-    character = fgetc(in); // K jeden w prawK
+    fseek(in, current - 1, SEEK_SET); 
+    character = fgetc(in); 
     return character;
 }
 int check_up (int current, FILE*in, int width){   
     char character;
-    fseek(in, current - width - 1, SEEK_SET); // dKkładnie ten pKd
-    character = fgetc(in); // K jeden w prawK
+    fseek(in, current - width - 1, SEEK_SET); 
+    character = fgetc(in);
     return character;
 }
 int check_down (int current, FILE*in, int width){   
     char character; 
-    fseek(in, current + width +1, SEEK_SET);; // dKkładnie ten pKd
-    character = fgetc(in); // K jeden w prawK
+    fseek(in, current + width +1, SEEK_SET);
+    character = fgetc(in); 
     return character;
 }
 
