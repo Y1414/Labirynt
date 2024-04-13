@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "translate.h"
 #include "read.h"
@@ -19,6 +20,7 @@ int main (int argc, char** argv ){
     FILE*bin;
     char* filename = argv[1];
     char* maze_filename = "";
+    bool has_solution = false;
 
     if (strstr(filename, ".bin\0")){
         bin = fopen(filename, "rb+");
@@ -26,7 +28,7 @@ int main (int argc, char** argv ){
             printf("Błąd w czytaniu pliku: %s", filename);
             return 1;
         }
-        maze_filename = translate(bin, filename);
+        maze_filename = translate(bin, filename, &has_solution);
         in = fopen(maze_filename, "r+");
     }
     else if (strstr(filename, ".txt\0")){
@@ -50,11 +52,19 @@ int main (int argc, char** argv ){
 
 
     FILE* out = fopen(instructions_filename, "w");
+
     int start=0, end=0, width=0, len=0;
 
     read(&start, &end, &width, in);
     
-    bfs(start, end, width, in);
+    if(has_solution){
+        read_solution (in, bin, start, width);
+        printf("Znaleziono rozwiązanie w pliku .bin\n");
+    }else
+        bfs(start, end, width, in);
+
+    
+
     inverse(in);
 
     instructions(start, width, end, in, out, bin);

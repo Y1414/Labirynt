@@ -19,6 +19,31 @@ char get_direction_char(char direction){
     printf("Nieznany kierunek \n");
     exit(1);    
 }
+char get_direction_int(char direction){
+    if (direction == 'N')
+        return 0;
+    if (direction == 'E')
+        return 1;
+    if (direction == 'S')
+        return 2;
+    if (direction == 'W')
+        return 3;
+    printf("Nieznany kierunek \n");
+    exit(1);    
+}
+
+int make_step(int width, int current, char counter, char direction, FILE*in){
+    for(int i=0;i<=counter;i++){
+        fseek(in, current, SEEK_SET);
+        if (fgetc(in) == ' '){
+            fseek(in, -1, SEEK_CUR);
+            fputc('+', in);
+        }
+        current = move_forward(current, direction, width);
+        
+    }
+    return current;
+}
 
 
 void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
@@ -89,4 +114,35 @@ void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
     fwrite(&steps,sizeof(steps) , 1, bin);
 
     fclose(out);
+}
+
+void read_solution (FILE*txt, FILE*bin, int start, int width){
+
+    char solution_offset_position = 33;
+    uint32_t solution_offset;
+    uint32_t id;
+    uint32_t steps;
+    uint8_t direction_bin;
+    uint8_t counter;
+    char direction;
+    int current = start;
+
+    fseek(bin , solution_offset_position, SEEK_SET);
+    fread(&solution_offset, sizeof(solution_offset), 1, bin);
+    fseek(bin, solution_offset, SEEK_SET);
+    fread(&id, sizeof(id), 1, bin);
+    if (id != 0x52524243){
+        printf("Nie znaleziono rozwiązania na solution offset\n");
+        exit(1);
+    }
+    fread(&steps, sizeof(steps), 1, bin);
+    
+    for (int i=0;i<(int)steps;i++){
+        fread(&direction_bin, sizeof(direction_bin), 1, bin);
+        fread(&counter, sizeof(counter), 1, bin);
+        direction = get_direction_int(direction_bin);
+
+        current = make_step(width, current, counter, direction, txt);
+    }
+
 }

@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct {
     uint32_t part1;
@@ -9,7 +10,7 @@ typedef struct {
     uint32_t part3;
 } Reserved;
 
-char*  translate(FILE*in, char* filename ) {
+char*  translate(FILE*in, char* filename, bool* has_solution ) {
 
     char*format_name = "txt";
     for (int i=1;i<=3;i++){
@@ -84,6 +85,9 @@ char*  translate(FILE*in, char* filename ) {
     }
     
     fclose(out);
+    if (solution_offset != 0){
+        *has_solution = true;
+    }
 
     return filename;
 }
@@ -126,10 +130,10 @@ FILE* to_bin(FILE* in, char* filename){
     char c;
     int x = 0;
     int y = 1;
-    char current_value;
+    char header_size = 40;
 
     
-    fseek(out, 40 - 3, SEEK_SET);
+    fseek(out, header_size - 3, SEEK_SET);
 
     while((c = fgetc(in)) != EOF){
         if (c == '\n'){
