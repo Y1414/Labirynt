@@ -67,9 +67,9 @@ int main (int argc, char** argv ){
 
     inverse(in);
     printf("Znaleziono wyjście z labiryntu\n");
+    printf("Wpisywanie instrukcji do pliku: %s\n", instructions_filename);
     instructions(start, width, end, in, out, bin);
     clear(in);
-    printf("Wpisywanie instrukcji do pliku: %s\n", instructions_filename);
     
     fclose(in);
     fclose(bin);

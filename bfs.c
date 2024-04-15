@@ -58,7 +58,7 @@ void add_neighbours(char* ways, stack_t* queue, FILE*in, int current, int width)
 void translate_path (int start, int width,int end, FILE* in){
     char direction = 0;
     int current = start;
-    char ways[4];
+    char ways[4] = {0,0,0,0};
     while(!is_start(ways))
     {
 
@@ -87,7 +87,7 @@ void bfs (int start, int end, int width, FILE*in){
     stack_t queue = init_stack();
     queue = put_on_back(start, -1, queue);
     int current;
-    char ways[4];
+    char ways[4] = {0,0,0,0};
     while (!is_end(ways)){
         current = stack_head(queue);
         char ways[4] = {check_up(current, in, width), check_right(current, in), check_down(current, in, width), check_left(current, in)};
