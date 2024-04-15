@@ -1,4 +1,4 @@
-Program uruchamia się w następujący sposób: ./labirynt <lokalizacja_pliku>
+Program uruchamia się w następujący sposób: ./labirynt <lokalizacja_pliku> (po skompilowaniu poleceniem 'make')
 
 Akceptowane rozszerzenia to .bin i .txt
 
