@@ -39,3 +39,6 @@ Do wykonania projektu zostały użyte:
 * valgrind 3.18.1 (do pomiarów pamięci oraz wykrywania wycieków pamięci)
 * ChatGPT 3.5 (do wyjaśnienia niektórych zagadnień związanych z projektem np. pliku binarnego oraz do implementacji prostych funkcji)
 * hex-editor (do odczytu plików binarnych)
+
+Twórcy: Piotr Gawroński
+
