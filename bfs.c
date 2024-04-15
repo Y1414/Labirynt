@@ -43,11 +43,23 @@ char get_direction(char current){
         return 3;
 }
 
+void add_neighbours(char* ways, stack_t* queue, FILE*in, int current, int width){
+    for (int i=0;i<4;i++){
+        if(ways[i] == ' ' || ways[i] == 'K'){
+            int new_pos = move_forward(current, i, width);
+            fseek(in, new_pos, SEEK_SET);
+            fputc(select_char(i), in);
+            *queue = put_on_back(new_pos, current, *queue);
+        }
+    }
+}
+
 
 void translate_path (int start, int width,int end, FILE* in){
     char direction = 0;
     int current = start;
-    while(1)
+    char ways[4];
+    while(!is_start(ways))
     {
 
         char ways[4] = {check_up(current, in, width), check_right(current, in), check_down(current, in, width), check_left(current, in)};
@@ -75,18 +87,12 @@ void bfs (int start, int end, int width, FILE*in){
     stack_t queue = init_stack();
     queue = put_on_back(start, -1, queue);
     int current;
-    while (1){
+    char ways[4];
+    while (!is_end(ways)){
         current = stack_head(queue);
         char ways[4] = {check_up(current, in, width), check_right(current, in), check_down(current, in, width), check_left(current, in)};
         queue = stack_pop(queue);
-        for (int i=0;i<4;i++){
-            if(ways[i] == ' ' || ways[i] == 'K'){
-                int new_pos = move_forward(current, i, width);
-                fseek(in, new_pos, SEEK_SET);
-                fputc(select_char(i), in);
-                queue = put_on_back(new_pos, current, queue);
-            }
-        }
+        add_neighbours(ways,&queue, in,current, width);
         if (is_end(ways))
             break;
     }

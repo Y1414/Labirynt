@@ -54,23 +54,27 @@ int main (int argc, char** argv ){
     FILE* out = fopen(instructions_filename, "w");
 
     int start=0, end=0, width=0, len=0;
-
+    printf("Wczytywanie pliku\n");
     read(&start, &end, &width, in);
     
     if(has_solution){
         read_solution (in, bin, start, width);
         printf("Znaleziono rozwiązanie w pliku .bin\n");
-    }else
+    }else{
         bfs(start, end, width, in);
-
-    
+        printf("Szukanie rozwiązania\n");
+    }   
 
     inverse(in);
-
+    printf("Znaleziono wyjście z labiryntu\n");
     instructions(start, width, end, in, out, bin);
     clear(in);
-
+    printf("Wpisywanie instrukcji do pliku: %s\n", instructions_filename);
+    
     fclose(in);
     fclose(bin);
+
+    printf("Proces zakończony sukcesem\n");
+
     return 0;
 }
