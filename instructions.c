@@ -74,7 +74,7 @@ void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
 
     fwrite(&steps,sizeof(steps) , 1, bin);
 
-
+    fprintf(out, "START\n");
     while(current != end)
     {
         char ways[4] = {check_up(current, in, width), check_right(current, in), check_down(current, in, width), check_left(current, in)};
@@ -105,6 +105,7 @@ void instructions (int start, int width, int end, FILE*in, FILE*out, FILE*bin){
         current = move_forward(current, direction, width);
     }
     fprintf(out, "FORWARD %d\n", sum+1);
+    fprintf(out, "STOP");
     direction_bin = get_direction_char(direction);
     count = sum;
     fwrite(&direction_bin, sizeof(direction_bin), 1, bin);
