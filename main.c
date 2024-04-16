@@ -25,7 +25,7 @@ int main (int argc, char** argv ){
     if (strstr(filename, ".bin\0")){
         bin = fopen(filename, "rb+");
         if (bin == NULL){
-            printf("Błąd w czytaniu pliku: %s", filename);
+            printf("Błąd w czytaniu pliku: %s\n", filename);
             return 1;
         }
         maze_filename = translate(bin, filename, &has_solution);
